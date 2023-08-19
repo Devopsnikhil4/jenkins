@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Terraform Create Network') {
             steps {
-                git branch: 'main', url: 'https://github.com/b54-clouddevops/terraform-vpc.git'
+                git branch: 'main', url: 'https://github.com/Devopsnikhil4/terraform-vpc.git'
                         sh "terrafile -f env-${ENV}/Terrafile"
                         sh "terraform init --backend-config=env-${ENV}/${ENV}-backend.tfvars  -reconfigure"
                         sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
@@ -19,7 +19,7 @@ pipeline {
 
         stage('Terraform Create ALB') {
             steps {
-                git branch: 'main', url: 'https://github.com/b54-clouddevops/terraform-loadbalancers.git'
+                git branch: 'main', url: 'https://github.com/Devopsnikhil4/terraform-loadbalancers.git'
                         sh "terrafile -f env-${ENV}/Terrafile"
                         sh "terraform init --backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
                         sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
@@ -29,7 +29,7 @@ pipeline {
 
         stage('Terraform Create Databases') {
             steps {
-                        git branch: 'main', url: 'https://github.com/b54-clouddevops/terraform-databases.git'
+                        git branch: 'main', url: 'https://github.com/Devopsnikhil4/terraform-databases.git'
                         sh "terrafile -f env-${ENV}/Terrafile"
                         sh "terraform init --backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
                         sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
@@ -41,7 +41,7 @@ pipeline {
            parallel {
             stage('Creating-Catalogue') {
                    steps {
-                       dir('Catalogue') {  git branch: 'main', url: 'https://github.com/b54-clouddevops/catalogue.git'
+                       dir('Catalogue') {  git branch: 'main', url: 'https://github.com/Devopsnikhil4/catalogue.git'
                           sh '''
                             cd mutable-infra
                             terrafile -f env-${ENV}/Terrafile
@@ -54,7 +54,7 @@ pipeline {
                   }
             stage('Creating-User') {
                    steps {
-                       dir('USER') {  git branch: 'main', url: 'https://github.com/b54-clouddevops/user.git'
+                       dir('USER') {  git branch: 'main', url: 'https://github.com/Devopsnikhil4/user.git'
                           sh '''
                             cd mutable-infra
                             terrafile -f env-${ENV}/Terrafile
@@ -67,7 +67,7 @@ pipeline {
                    }
             stage('Creating-Cart') {
                 steps {
-                    dir('CART') {  git branch: 'main', url: 'https://github.com/b54-clouddevops/cart.git'
+                    dir('CART') {  git branch: 'main', url: 'https://github.com/Devopsnikhil4/cart.git'
                           sh '''
                             cd mutable-infra
                             terrafile -f env-${ENV}/Terrafile
@@ -81,7 +81,7 @@ pipeline {
 
             stage('Creating-Shipping') {
                 steps {
-                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/b54-clouddevops/shipping.git'
+                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/Devopsnikhil4/shipping.git'
                           sh '''
                             cd mutable-infra
                             sleep 30   
@@ -95,7 +95,7 @@ pipeline {
                     
             stage('Creating-Payment') {
                 steps {
-                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/b54-clouddevops/payment.git'
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/Devopsnikhil4/payment.git'
                           sh '''
                             cd mutable-infra
                             sleep 30
@@ -113,7 +113,7 @@ pipeline {
                     
             stage('Creating-Frontend') {
                 steps {
-                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/b54-clouddevops/frontend.git'
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/Devopsnikhil4/frontend.git'
                           sh '''
                             cd mutable-infra
                             terrafile -f env-${ENV}/Terrafile
